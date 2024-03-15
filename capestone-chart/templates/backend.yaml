@@ -3,16 +3,16 @@ kind: Deployment
 metadata:
     name: {{ .Release.Name }}-backend-deploy
     labels:
-        {{- include "backend-labels" . | nindent 4 -}}
+        {{- template "backend.labels" -}}
 spec:
     replicas: {{ .Values.backend.replicas }}
     selector:
         matchLabels:
-            {{- include "backend-labels" . | nindent 6 -}}
+            {{- template "backend.labels" -}}
     template:
         metadata:
             labels:
-                {{- include "backend-labels" . | nindent 8 -}}
+                {{- template "backend.labels" -}}
         spec:
             containers:
                 - image: {{ .Values.backend.containers.image }}
@@ -42,12 +42,12 @@ metadata:
 spec:
     type: {{ .Values.service.backend.type }}
     selector:
-        {{- include "backend-labels" . | nindent 4 -}}
+        {{- template "backend.labels" -}}
     ports:
      - name: http
        protocol: TCP
        targetPort: {{ .Values.service.backend.targetPort }}
        port: {{ .Values.service.backend.port }}
-{{- if eq .Values.service.backend.type "NodePort" -}}
+{{- if eq .Values.service.backend.type "NodePort" }}
        nodePort: {{ .Values.service.backend.nodePort }}
-{{- end -}}
+{{ end -}}

@@ -59,12 +59,12 @@ db:
 # frontend service's values
 service:
   frontend:
-    type: LoadBalancer
+    type: NodePort
     nodePort: 30000
     targetPort: 80
     port: 80
   backend:
-    type: ClusterIP
+    type: NodePort
     nodePort: 30001
     targetPort: 5000
     port: 5000

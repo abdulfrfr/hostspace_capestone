@@ -10,9 +10,6 @@ COPY package-lock.json .
 # Install dependencies
 RUN npm install
 
-# Backend url
-ENV REACT_APP_BACKEND_URL=""
-
 # Copy the rest of the frontend files
 COPY public ./public
 COPY src ./src

@@ -28,9 +28,9 @@ spec:
                         memory: {{ .Values.backend.containers.resources.requests.memory }}
                   imagePullPolicy: {{ .Values.backend.containers.imagePullPolicy }}
                   env:
-                    - name: {{ .Values.backend.containers.env[0].name }}
+                    - name: {{ .Values.backend.containers.env.name1 }}
                       value: {{ .Release.Name }}-backend-svc
-                    - name: {{ .Values.backend.containers.env[1].name }}
+                    - name: {{ .Values.backend.containers.env.name2 }}
                       value: {{ .Values.backend.containers.port }}
 
 ---

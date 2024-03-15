@@ -14,8 +14,8 @@ frontend:
           memory: 256Mi
     imagePullPolicy: always
     env:
-      - name: REACT_APP_BACKEND_URL
-        value: ""
+      name1: REACT_APP_BACKEND_URL
+      value1: ""
 
 
 # backend application's values
@@ -34,10 +34,10 @@ backend:
           memory: 256Mi
     imagePullPolicy: always
     env:
-      - name: MONGODB_URL
-        value: ""
-      - name: PORT
-        value: ""
+      name1: MONGODB_URL
+      value1: ""
+      name2: PORT
+      value2: ""
 
 
 # db application's values

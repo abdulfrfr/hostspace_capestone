@@ -28,8 +28,9 @@ spec:
                         memory: {{ .Values.frontend.containers.resources.requests.memory }}
                   imagePullPolicy: {{ .Values.frontend.containers.imagePullPolicy }}
                   env:
-                    - name: {{ .Values.frontend.containers.env[0].name }}
-                      value: {{ .Values.frontend.containers.env[0].value }}
+                    - name: {{ .Values.frontend.containers.env.name1 }}
+                      value: {{ .Values.frontend.containers.env.value1 }}
+
 
                   
 ---

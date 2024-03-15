@@ -13,6 +13,9 @@ frontend:
           cpu: 250m
           memory: 256Mi
     imagePullPolicy: always
+    env:
+      - name: REACT_APP_BACKEND_URL
+        value: ""
 
 
 # backend application's values
@@ -30,6 +33,11 @@ backend:
           cpu: 250m
           memory: 256Mi
     imagePullPolicy: always
+    env:
+      - name: MONGODB_URL
+        value: ""
+      - name: PORT
+        value: ""
 
 
 # db application's values

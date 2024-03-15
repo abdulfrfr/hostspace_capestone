@@ -28,9 +28,9 @@ spec:
                         memory: {{ .Values.backend.containers.resources.requests.memory }}
                   imagePullPolicy: {{ .Values.backend.containers.imagePullPolicy }}
                   env:
-                    - name: MONGODB_URL
+                    - name: {{ .Values.backend.containers.env[0].name }}
                       value: {{ .Release.Name }}-backend-svc
-                    - name: PORT
+                    - name: {{ .Values.backend.containers.env[1].name }}
                       value: {{ .Values.backend.containers.port }}
 
 ---

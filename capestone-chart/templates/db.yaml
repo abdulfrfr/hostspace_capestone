@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: {{ .Release.Name }}-db-deploy
+    labels:
+        {{- include "db-labels" . | nindent 4 -}}
+spec:
+    replicas: {{ .Values.db.replicas }}
+    selector:
+        matchLabels:
+            {{- include "db-labels" . | nindent 6 -}}
+    template:
+        metadata:
+            labels:
+                {{- include "db-labels" . | nindent 8 -}}
+        spec:
+            containers:
+                - image: {{ .Values.db.containers.image }}
+                  name: {{ .Values.db.containers.name }}
+                  ports:
+                   - containerPort: {{ .Values.db.containers.port }}
+                  resources:
+                    limits:
+                        cpu: {{ .Values.db.containers.resources.limits.cpu }}
+                        memory: {{ .Values.db.containers.resources.limits.memory }}
+                    requests:
+                        cpu: {{ .Values.db.containers.resources.requests.cpu }}
+                        memory: {{ .Values.db.containers.resources.requests.memory }}
+                  imagePullPolicy: {{ .Values.db.containers.imagePullPolicy }}
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+    name: {{ .Release.Name }}-backend-svc
+spec:
+    type: {{ .Values.service.db.type }}
+    selector:
+        {{- include "backend-labels" . | nindent 4 -}}
+    ports:
+     - name: http
+       protocol: TCP
+       targetPort: {{ .Values.service.db.targetPort }}
+       port: {{ .Values.service.db.port }}

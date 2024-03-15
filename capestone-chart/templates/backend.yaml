@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: {{ .Release.Name }}-backend-deploy
+    labels:
+        {{- include "backend-labels" . | nindent 4 -}}
+spec:
+    replicas: {{ .Values.backend.replicas }}
+    selector:
+        matchLabels:
+            {{- include "backend-labels" . | nindent 6 -}}
+    template:
+        metadata:
+            labels:
+                {{- include "backend-labels" . | nindent 8 -}}
+        spec:
+            containers:
+                - image: {{ .Values.backend.containers.image }}
+                  name: {{ .Values.backend.containers.name }}
+                  ports:
+                   - containerPort: {{ .Values.backend.containers.port }}
+                  resources:
+                    limits:
+                        cpu: {{ .Values.backend.containers.resources.limits.cpu }}
+                        memory: {{ .Values.backend.containers.resources.limits.memory }}
+                    requests:
+                        cpu: {{ .Values.backend.containers.resources.requests.cpu }}
+                        memory: {{ .Values.backend.containers.resources.requests.memory }}
+                  imagePullPolicy: {{ .Values.backend.containers.imagePullPolicy }}
+                  environments:
+                    MONGODB_URL: {{ .Release.Name }}-backend-svc
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+    name: {{ .Release.Name }}-backend-svc
+spec:
+    type: {{ .Values.service.backend.type }}
+    selector:
+        {{- include "backend-labels" . | nindent 4 -}}
+    ports:
+     - name: http
+       protocol: TCP
+       targetPort: {{ .Values.service.backend.targetPort }}
+       port: {{ .Values.service.backend.port }}
+{{- if eq .Values.service.backend.type "NodePort" -}}
+       nodePort: {{ .Values.service.backend.nodePort }}
+{{- end -}}

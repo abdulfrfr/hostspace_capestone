@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: {{ .Release.Name }}-frontend-deploy
+    labels:
+        {{- include "frontend-labels" . | nindent 4 -}}
+spec:
+    replicas: {{ .Values.frontend.replicas }}
+    selector:
+        matchLabels:
+            {{- include "frontend-labels" . | nindent 6 -}}
+    template:
+        metadata:
+            labels:
+                {{- include "frontend-labels" . | nindent 8 -}}
+        spec:
+            containers:
+                - image: {{ .Values.frontend.containers.image }}
+                  name: {{ .Values.frontend.containers.name }}
+                  ports:
+                   - containerPort: {{ .Values.frontend.containers.port }}
+                  resources:
+                    limits:
+                        cpu: {{ .Values.frontend.containers.resources.limits.cpu }}
+                        memory: {{ .Values.frontend.containers.resources.limits.memory }}
+                    requests:
+                        cpu: {{ .Values.frontend.containers.resources.requests.cpu }}
+                        memory: {{ .Values.frontend.containers.resources.requests.memory }}
+                  imagePullPolicy: {{ .Values.frontend.containers.imagePullPolicy }}
+
+                  
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+    name: {{ .Release.Name }}-frontend-svc
+spec:
+    type: {{ .Values.service.frontend.type }}
+    selector:
+        {{- include "frontend-labels" . | nindent 4 }}
+    ports:
+     - name: http
+       protocol: TCP
+       targetPort: {{ .Values.service.frontend.targetPort }}
+       port: {{ .Values.service.frontend.port }}
+{{- if eq .Values.service.frontend.type "NodePort" -}}
+       nodePort: {{ .Values.service.frontend.nodePort }}
+{{- end -}}

@@ -27,8 +27,11 @@ spec:
                         cpu: {{ .Values.backend.containers.resources.requests.cpu }}
                         memory: {{ .Values.backend.containers.resources.requests.memory }}
                   imagePullPolicy: {{ .Values.backend.containers.imagePullPolicy }}
-                  environments:
-                    MONGODB_URL: {{ .Release.Name }}-backend-svc
+                  env:
+                    - name: MONGODB_URL
+                      value: {{ .Release.Name }}-backend-svc
+                    - name: PORT
+                      value: {{ .Values.backend.containers.port }}
 
 ---
 

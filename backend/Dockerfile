@@ -12,4 +12,4 @@ COPY backend.js .
 
 CMD [ "node" , "backend.js"]
 
-EXPOSE 3001
+EXPOSE 5000

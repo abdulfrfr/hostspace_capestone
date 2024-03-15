@@ -27,6 +27,9 @@ spec:
                         cpu: {{ .Values.frontend.containers.resources.requests.cpu }}
                         memory: {{ .Values.frontend.containers.resources.requests.memory }}
                   imagePullPolicy: {{ .Values.frontend.containers.imagePullPolicy }}
+                  env:
+                    - name: REACT_APP_BACKEND_URL
+                      value: ""
 
                   
 ---

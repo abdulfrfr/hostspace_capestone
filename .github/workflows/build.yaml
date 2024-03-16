@@ -1,0 +1,46 @@
+name: Build abd Push Docker Image 
+
+run-name: ${{ github.actor }}
+
+on: workflow_dispatch
+jobs:
+  build-docker-images:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - uses: hashicorp/setup-terraform@v3
+
+    - name: Login Docker Hub
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_PASSWORD }}
+
+    - name: Build Backend Image
+      working-directory: ./backend
+      run: docker build -t backend-app .
+
+    - name: Tag Backend Image
+      run: docker tag frontend-app abdulfrfr/backend-app:latest
+
+
+    - name: Push Backend Image to ECR
+      run: |
+        docker push abdulfrfr/backend-app:latest
+
+    
+    - name: Build Frontend Image
+      working-directory: ./frontend
+      run: docker build -t frontend-app.
+  
+    - name: Tag Backend Image
+      run: docker tag frontend-app abdulfrfr/frontend-app:latest
+  
+  
+    - name: Push Backend Image to ECR
+      run: |
+          docker push abdulfrfr/frontend-app:latest
+      
+
+      

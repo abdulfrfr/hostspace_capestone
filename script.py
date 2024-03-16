@@ -39,7 +39,7 @@ if file_location_query == "Y" or file_location_query == "y":
     repo = repo_git.split(".")[0]
 
 
-    print("Inprogress...")
+    print("In progress...")
     output = subprocess.run(command, shell=True, capture_output=True, text=True)
 
      # Check if the command was successful
@@ -70,6 +70,8 @@ if file_location_query == "Y" or file_location_query == "y":
 
         # Get github access key token
         token = input("Please input your GitHub access key token: ")
+
+        print("workflow triggered!... In progress...")
         # Define your token and GitHub API version
         github_api_version = '2022-11-28'
 
@@ -100,7 +102,7 @@ if file_location_query == "Y" or file_location_query == "y":
 
             # Make the GET request
             response = requests.get(workflow_dispatch_url, headers=headers)
-            print(response.json())
+            print(response.json()['id'])
 
 
         

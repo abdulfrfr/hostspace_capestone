@@ -2,7 +2,10 @@ name: Build abd Push Docker Image
 
 run-name: ${{ github.actor }}
 
-on: workflow_dispatch
+on: 
+  workflow_dispatch:
+    branches:
+      - main
 jobs:
   build-docker-images:
     runs-on: ubuntu-latest

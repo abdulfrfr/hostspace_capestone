@@ -92,17 +92,22 @@ if file_location_query == "Y" or file_location_query == "y":
         workflow_id = response.json()['workflows'][0]['id']
 
         if workflow_id:
-            workflow_dispatch_url = f'https://api.github.com/repos/{owner}/{repo}/actions/workflows/{workflow_id}'
+            workflow_dispatch_url = f'https://api.github.com/repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches'
             # Define headers
             headers = {
                 'Authorization': f'token {token}',
                 'Accept': 'application/vnd.github.v3+json',
                 'X-GitHub-Api-Version': github_api_version
             }
+            # Define request body
+            payload = {
+                'ref': 'main'
+            }
+
 
             # Make the GET request
-            response = requests.get(workflow_dispatch_url, headers=headers)
-            print(response.json()['id'])
+            response = requests.post(workflow_dispatch_url, headers=headers, json=payload)
+            print(response.json())
 
 
         

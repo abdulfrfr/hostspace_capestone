@@ -100,7 +100,7 @@ if file_location_query == "Y" or file_location_query == "y":
                 'X-GitHub-Api-Version': github_api_version
             }
             # Define request body
-            payload = {'ref': 'main'}
+            payload = {"ref": "main"}
 
 
             # Make the GET request

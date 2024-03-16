@@ -1,8 +1,29 @@
 import os
 import subprocess
 import requests
+import time
 
 file_location_query = input("Do you have a Dokerfile available in your GitHub repo?(Yy/Nn): ")
+def run_status(run_id='none'):
+    url = f'https://api.github.com/repos/{owner}/{repo}/actions/runs/{run_id}'
+    headers = {
+    'Accept': 'application/vnd.github+json',
+    'Authorization': f'Bearer {token}',
+    }
+    response = requests.get(url, headers=headers)
+
+    if response.status_code == 200:
+        # Parse the JSON response
+        json_data = response.json()
+
+        # Extract and return the status field
+        status = json_data.get('status')
+        return status
+    else:
+        # Print an error message for non-OK responses
+        print(f"Error: Unable to fetch run status. Status code: {response.status_code}")
+        return None
+
 
 def dockerfile_avail():
     file_location= input("Input full path to Dockerfile, if you are in the directory where the Dockerfile is, just input '.': ")
@@ -105,9 +126,33 @@ if file_location_query == "Y" or file_location_query == "y":
 
             # Make the GET request
             response = requests.post(workflow_dispatch_url, headers=headers, json=payload)
-            print(response.json())
+            
 
 
+            url=f"https://api.github.com/repos/{owner}/{repo}/actions/runs"
+            headers = {
+            "Accept": "application/vnd.github+json",
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {token}",  # Add any headers you need
+            "X-GitHub-Api-Version": "2022-11-28"
+            }
+
+            data = {"ref":"main"}
+
+            response=requests.get(url, headers=headers, json=data)
+
+            run_id = response.json().get('workflow_runs', [])[0]['id']
+
+            status = run_status(run_id)
+
+
+            # Extract and return the status field
+            status = 'in_progress'
+            while status == 'in_progress':
+                status = run_status(run_id)
+                time.sleep(20)
+                print("Wrokflow run Completed!")
+            print(status)
         
     else:
         print("Command failed.")

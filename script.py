@@ -28,7 +28,20 @@ if file_location_query == "Y" or file_location_query == "y":
 
     command= f'git clone {git_repo}'
 
+    # Split the URL by "/"
+    parts = git_repo.split("/")
+
+    # Get the second-to-last part
+    repo_git = parts[-1]
+
+    owner = parts[3]
+
+    repo = repo_git.split(".")[0]
+
+
+    print("Inprogress...")
     output = subprocess.run(command, shell=True, capture_output=True, text=True)
+
      # Check if the command was successful
     if output.returncode == 0:
     
@@ -49,25 +62,55 @@ if file_location_query == "Y" or file_location_query == "y":
                 if fold == "Dockerfile":
                     print(fold)
 
-        url = f"https://api.github.com/repos/{repo_owner}/{repo_name}/actions/workflows/{workflow_name}/dispatches"
+
+        # Delete cloned folder after checking if 'Dockerfile(s) is/are available'
+        command= f'rm -rf {repo}'
+
+        subprocess.run(command, shell=True, capture_output=True, text=True)
+
+        # Get github access key token
+        token = input("Please input your GitHub access key token: ")
+        # Define your token and GitHub API version
+        github_api_version = '2022-11-28'
+
+        # Construct the URL
+        get_workflow_id_url = f'https://api.github.com/repos/{owner}/{repo}/actions/workflows'
+
+        # Define headers
         headers = {
-        "Accept": "application/vnd.github+json",
-        "Content-Type": "application/json",
-        "Authorization": f"Bearer {token}",  # Add any headers you need
-        "X-GitHub-Api-Version": "2022-11-28"
+            'Authorization': f'token {token}',
+            'Accept': 'application/vnd.github.v3+json',
+            'X-GitHub-Api-Version': github_api_version
         }
 
-        data = {"ref":"main"}
+        # Make the GET request
+        response = requests.get(get_workflow_id_url, headers=headers)
 
+        # Print the response content
+        workflow_id = response.json()['workflows'][0]['id']
 
-        requests.post(url, headers=headers, json=data)
-        print("Your Workflow run has been triggered and is In Progress")
+        if workflow_id:
+            workflow_dispatch_url = f'https://api.github.com/repos/{owner}/{repo}/actions/workflows/{workflow_id}'
+            # Define headers
+            headers = {
+                'Authorization': f'token {token}',
+                'Accept': 'application/vnd.github.v3+json',
+                'X-GitHub-Api-Version': github_api_version
+            }
+
+            # Make the GET request
+            response = requests.get(workflow_dispatch_url, headers=headers)
+            print(response.json())
+
 
         
     else:
         print("Command failed.")
         print("Error message:")
         print(output.stderr)
+
+
+
 
 elif file_location_query == "N" or file_location_query == "n":
     print("You will need a Dockerfile in your repo to make use of this script.")

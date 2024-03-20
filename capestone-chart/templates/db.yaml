@@ -33,13 +33,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-    name: {{ .Release.Name }}-backend-svc
+    name: {{ .Release.Name }}-db-svc
 spec:
     type: {{ .Values.service.db.type }}
     selector:
         {{- template "db.labels" -}}
     ports:
-     - name: http
-       protocol: TCP
-       targetPort: {{ .Values.service.db.targetPort }}
-       port: {{ .Values.service.db.port }}
+        - name: http
+          port: 27017
+          protocol: TCP
+          targetPort: 27017

@@ -15,7 +15,7 @@ frontend:
     imagePullPolicy: Always
     env:
       name1: REACT_APP_BACKEND_URL
-      value1: 192.168.49.2:30001
+      value1: 192.168.49.2:30001/data
 
 
 # backend application's values

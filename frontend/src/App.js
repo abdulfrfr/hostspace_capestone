@@ -1,56 +1,52 @@
-import React, { useState } from 'react';
-import axios from 'axios'
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 function App() {
-  const [data, setData] = useState(null);
-  const [message, setMessage] = useState('');
-  const [postData, setPostData] = useState(null);
+  const [data, setData] = useState([]);
+  const [inputValue, setInputValue] = useState('');
 
-  const backend = process.env.REACT_APP_BACKEND_URL;
+  // Fetch data from backend on component mount
+  useEffect(() => {
+    fetchData();
+  }, []);
 
-  function fetchData() {
-    axios.get(backend)
-      .then((res) => {
-        setData(res.data)
-      })
-      .catch((err)=> {
-        console.log(err);
-      })
-  }
-  
-  function sendData() {
-    axios.post(backend, {
-      ...postData,
-      message: message
-    }, {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-    .then((res)=> {
-      setPostData(res.data)
-    })
-    .catch((err)=> {
-      console.log(err);
-    })
-  }
+  const fetchData = async () => {
+    try {
+      const response = await axios.get('http://localhost:5000/data');
+      setData(response.data);
+    } catch (error) {
+      console.error('Error fetching data:', error.message);
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.post('http://localhost:5000/data', { message: inputValue });
+      fetchData(); // Fetch updated data after submitting
+      setInputValue('');
+    } catch (error) {
+      console.error('Error submitting data:', error.message);
+    }
+  };
 
   return (
     <div>
-      <h1>Frontend Application</h1>
-      <h2>Get Data</h2>
-      <button onClick={fetchData}>Get Data</button>
-      {data && <pre>{JSON.stringify(data, null, 2)}</pre>}
-      <h2>Add Data</h2>
-      <label htmlFor="message">Message:</label>
-      <input
-        type="text"
-        id="message"
-        value={message}
-        onChange={(e) => setMessage(e.target.value)}
-      />
-      <button onClick={sendData}>Add Data</button>
-      {postData && <pre>{JSON.stringify(postData, null, 2)}</pre>}
+      <h1>Data from Backend</h1>
+      <ul>
+        {data.map((item, index) => (
+          <li key={index}>{item.message}</li>
+        ))}
+      </ul>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+          placeholder="Enter new data"
+        />
+        <button type="submit">Submit</button>
+      </form>
     </div>
   );
 }

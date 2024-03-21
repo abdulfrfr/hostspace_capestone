@@ -27,6 +27,11 @@ spec:
                         cpu: {{ .Values.db.containers.resources.requests.cpu }}
                         memory: {{ .Values.db.containers.resources.requests.memory }}
                   imagePullPolicy: {{ .Values.db.containers.imagePullPolicy }}
+                  env:
+                    - name: ME_CONFIG_MONGODB_ADMINUSERNAME
+                      value: admin
+                    - name: ME_CONFIG_MONGODB_ADMINPASSWORD
+                      value: "@abdulfrfr11"
 
 ---
 

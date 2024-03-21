@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import axios from 'axios'
 
 function App() {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState('');
   const [message, setMessage] = useState('');
-  const [postData, setPostData] = useState(null);
+  const [postData, setPostData] = useState('');
 
   const backend = process.env.REACT_APP_BACKEND_URL;
 

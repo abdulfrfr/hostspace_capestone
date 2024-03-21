@@ -3,16 +3,16 @@ kind: Deployment
 metadata:
     name: {{ .Release.Name }}-frontend-deploy
     labels:
-        {{- template "frontend.labels" -}}
+        app: frontend-app
 spec:
     replicas: {{ .Values.frontend.replicas }}
     selector:
         matchLabels:
-            {{- template "frontend.labels" -}}
+            app: frontend-app
     template:
         metadata:
             labels:
-                {{- template "frontend.labels" -}}
+                app: frontend-app
         spec:
             containers:
                 - image: {{ .Values.frontend.containers.image }}
@@ -42,7 +42,7 @@ metadata:
 spec:
     type: {{ .Values.service.frontend.type }}
     selector:
-        {{- template "frontend.labels" -}}
+        app: frontend-app
     ports:
      - name: http
        protocol: TCP

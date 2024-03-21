@@ -3,22 +3,22 @@ kind: Deployment
 metadata:
     name: {{ .Release.Name }}-db-deploy
     labels:
-        {{- template "db.labels" -}}
+        app: db-app
 spec:
     replicas: {{ .Values.db.replicas }}
     selector:
         matchLabels:
-            {{- template "db.labels" -}}
+            app: db-app
     template:
         metadata:
             labels:
-                {{- template "db.labels" -}}
+                app: db-app
         spec:
             containers:
                 - image: {{ .Values.db.containers.image }}
                   name: {{ .Values.db.containers.name }}
                   ports:
-                   - containerPort: {{ .Values.db.containers.port }}
+                    - containerPort: {{ .Values.db.containers.port }}
                   resources:
                     limits:
                         cpu: {{ .Values.db.containers.resources.limits.cpu }}
@@ -37,7 +37,7 @@ metadata:
 spec:
     type: {{ .Values.service.db.type }}
     selector:
-        {{- template "db.labels" -}}
+        app: db-app
     ports:
         - name: http
           port: 27017

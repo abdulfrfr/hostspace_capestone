@@ -3,16 +3,16 @@ kind: Deployment
 metadata:
     name: {{ .Release.Name }}-backend-deploy
     labels:
-        {{- template "backend.labels" -}}
+        app: backend-app
 spec:
     replicas: {{ .Values.backend.replicas }}
     selector:
         matchLabels:
-            {{- template "backend.labels" -}}
+            app: backend-app
     template:
         metadata:
             labels:
-                {{- template "backend.labels" -}}
+                app: backend-app
         spec:
             containers:
                 - image: {{ .Values.backend.containers.image }}
@@ -30,8 +30,8 @@ spec:
                   env:
                     - name: {{ .Values.backend.containers.env.name1 }}
                       value: {{ .Release.Name }}-backend-svc
-                    - name: {{ .Values.backend.containers.env.name2 }}
-                      value: {{ .Values.backend.containers.port }}
+                    # - name: {{ .Values.backend.containers.env.name2 }}
+                    #   value: {{ .Values.backend.containers.port }}
 
 ---
 
@@ -42,7 +42,7 @@ metadata:
 spec:
     type: {{ .Values.service.backend.type }}
     selector:
-        {{- template "backend.labels" -}}
+        app: backend-app
     ports:
      - name: http
        protocol: TCP

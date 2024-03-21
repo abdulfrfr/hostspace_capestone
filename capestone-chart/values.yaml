@@ -2,7 +2,7 @@
 frontend:
   replicas: 1
   containers:
-    image: ""
+    image: docker.io/abdulfrfr/frontend-app:latest
     name: frontend
     port: 80
     resources:
@@ -12,17 +12,17 @@ frontend:
       requests:
           cpu: 250m
           memory: 256Mi
-    imagePullPolicy: always
+    imagePullPolicy: Always
     env:
       name1: REACT_APP_BACKEND_URL
-      value1: ""
+      value1: 192.168.49.2:30001
 
 
 # backend application's values
 backend:
   replicas: 1
   containers:
-    image: ""
+    image: docker.io/abdulfrfr/backend-app:latest
     name: frontend
     port: 80
     resources:
@@ -32,12 +32,10 @@ backend:
       requests:
           cpu: 250m
           memory: 256Mi
-    imagePullPolicy: always
+    imagePullPolicy: Always
     env:
       name1: MONGODB_URL
-      value1: ""
       name2: PORT
-      value2: ""
 
 
 # db application's values
@@ -54,7 +52,7 @@ db:
       requests:
           cpu: 250m
           memory: 256Mi
-    imagePullPolicy: always
+    imagePullPolicy: Always
 
 # frontend service's values
 service:

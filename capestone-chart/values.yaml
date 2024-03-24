@@ -23,7 +23,7 @@ backend:
   replicas: 1
   containers:
     image: docker.io/abdulfrfr/backend-app:latest
-    name: frontend
+    name: backend
     port: 80
     resources:
       limits:
@@ -42,7 +42,7 @@ backend:
 db:
   replicas: 1
   containers:
-    image: mongo-express
+    image: mongo:latest
     name: db
     port: 27017
     resources:

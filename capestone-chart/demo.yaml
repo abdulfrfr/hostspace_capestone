@@ -1,0 +1,11 @@
+apiVersion: v1
+data:
+  MONGO_INITDB_ROOT_PASSWORD: cGFzc3dvcmQ=
+kind: Secret
+metadata:
+  creationTimestamp: "2024-03-23T12:45:36Z"
+  name: demo
+  namespace: default
+  resourceVersion: "29599"
+  uid: fe361111-585a-4303-a793-02255bc13d29
+type: Opaque

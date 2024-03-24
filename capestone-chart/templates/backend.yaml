@@ -28,10 +28,18 @@ spec:
                         memory: {{ .Values.backend.containers.resources.requests.memory }}
                   imagePullPolicy: {{ .Values.backend.containers.imagePullPolicy }}
                   env:
-                    - name: {{ .Values.backend.containers.env.name1 }}
-                      value: {{ .Release.Name }}-backend-svc:27017
-                    # - name: {{ .Values.backend.containers.env.name2 }}
-                    #   value: {{ .Values.backend.containers.port }}
+                    -   name: MONGO_URL
+                        value: {{ .Release.Name }}-db-svc
+                    -   name: MONGO_INITDB_ROOT_USERNAME
+                        valueFrom:
+                            configMapKeyRef:
+                                name: {{- Release.Name }}-configmap
+                                key: MONGO_USER
+                    -   name: MONGO_INITDB_ROOT_PASSWORD
+                        valueFrom:
+                            secretKeyRef:
+                                name: secret
+                                key: MONGO_USER
 
 ---
 

@@ -4,8 +4,12 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
 const app = express();
+app.use(cors());
 const PORT = process.env.PORT || 5000;
-const MONGODB_URL = process.env.MONGODB_URL || `mongodb://${process.env.MONGODB_USER}:${process.env.MONGODB_PASS}@${process.env.MONGODB_SERVICE}:27017/data?directConnection=true&authSource=admin`;
+const USERNAME = process.env.MONGO_INITDB_ROOT_USERNAME || 'YWRtaW4gLW4K'
+const PASSWORD = process.env.MONGO_INITDB_ROOT_PASSWORD || 'cGFzc3dvcmQgLW4K'
+const MONGO_SERVICE = process.env.MONGO_URL || 'mongo'
+const MONGODB_URL = process.env.MONGODB_URL || `mongodb://${USERNAME}:${PASSWORD}@${MONGO_SERVICE}:27017/data?directConnection=true&authSource=admin`;
 
 // MongoDB connection
 mongoose.connect(MONGODB_URL, {

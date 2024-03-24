@@ -28,7 +28,7 @@ spec:
                         memory: {{ .Values.frontend.containers.resources.requests.memory }}
                   imagePullPolicy: {{ .Values.frontend.containers.imagePullPolicy }}
                   env:
-                    - name: {{ .Values.frontend.containers.env.name1 }}
+                    - name: REACT_APP_API_URL
                       value: {{ .Values.frontend.containers.env.value1 }}
 
 

@@ -1,8 +1,8 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name:  {{- .Release.Name }}-configmap
+  name:  {{ .Release.Name }}-configmap
 data:
   app-config.yml: |
-    MONGO_USER: admin
+    MONGO_INITDB_ROOT_USERNAME: admin
 

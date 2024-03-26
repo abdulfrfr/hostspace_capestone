@@ -33,13 +33,13 @@ spec:
                     -   name: MONGO_INITDB_ROOT_USERNAME
                         valueFrom:
                             configMapKeyRef:
-                                name: {{- Release.Name }}-configmap
+                                name: {{ .Release.Name }}-configmap
                                 key: MONGO_USER
                     -   name: MONGO_INITDB_ROOT_PASSWORD
                         valueFrom:
                             secretKeyRef:
                                 name: secret
-                                key: MONGO_USER
+                                key: MONGO_INITDB_ROOT_PASSWORD
 
 ---
 

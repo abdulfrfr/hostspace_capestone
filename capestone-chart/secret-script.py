@@ -27,7 +27,7 @@ def check_file_existence(directory, filename):
 def create_and_get_sealed_secret(cred):
     secret_name= input("Give a name you want your cridential to be identified as: ")
 
-    command = f'kubectl create secret generic {secret_name}'
+    command = f'kubectl create secret generic {secret_name} --dry-run=client'
     for key, value in cred.items():
         command += f' --from-literal={key}={value}'
 
@@ -43,11 +43,13 @@ def create_and_get_sealed_secret(cred):
         kubectl_command= f'kubectl apply -f {secret_name}_sealed.yaml'
         subprocess.run(kubectl_command, shell=True, capture_output=True, text=True)
 
+        rm_command= f'rm {secret_name}.yaml'
+        subprocess.run(rm_command, shell=True, capture_output=True, text=True)
+
         with open(f"{secret_name}_sealed.yaml","r") as file:
             sealed_secret_data = yaml.safe_load(file)
 
         secrets_from_sealed_file = sealed_secret_data["spec"]["encryptedData"]
-
 
         
         with open("generated_secrets.txt", "w") as file:

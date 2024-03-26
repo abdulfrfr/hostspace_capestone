@@ -29,7 +29,9 @@ spec:
                   imagePullPolicy: {{ .Values.frontend.containers.imagePullPolicy }}
                   env:
                     - name: REACT_APP_API_URL
-                      value: {{ .Values.frontend.containers.env.value1 }}
+                      value: {{ .Release.Name }}-backend-svc
+                    - name: REACT_APP_BACKEND_NS
+                      value: default
 
 
                   

@@ -6,6 +6,7 @@ function App() {
   const [inputValue, setInputValue] = useState('');
 
   const apiUrl = process.env.REACT_APP_API_URL
+  const ns = process.env.REACT_APP_BACKEND_NS
 
   // Fetch data from backend on component mount
   useEffect(() => {
@@ -14,7 +15,7 @@ function App() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(`http://${apiUrl}:5000/data`);
+      const response = await axios.get(`http://${apiUrl}.${ns}.svc.cluster.local:5000/data`);
       setData(response.data);
     } catch (error) {
       console.error('Error fetching data:', error.message);

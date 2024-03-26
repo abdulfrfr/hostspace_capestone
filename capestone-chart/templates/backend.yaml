@@ -30,6 +30,8 @@ spec:
                   env:
                     -   name: MONGO_URL
                         value: {{ .Release.Name }}-db-svc
+                    -   name: MONGO_NS
+                        value: default
                     -   name: MONGO_INITDB_ROOT_USERNAME
                         valueFrom:
                             configMapKeyRef:

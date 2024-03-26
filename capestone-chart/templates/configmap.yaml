@@ -3,6 +3,4 @@ kind: ConfigMap
 metadata:
   name:  {{ .Release.Name }}-configmap
 data:
-  app-config.yml: |
-    MONGO_INITDB_ROOT_USERNAME: admin
-
+  MONGO_INITDB_ROOT_USERNAME: admin

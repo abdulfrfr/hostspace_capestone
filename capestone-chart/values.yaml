@@ -57,7 +57,7 @@ db:
 # frontend service's values
 service:
   frontend:
-    type: NodePort
+    type: LoadBalancer
     nodePort: 30000
     targetPort: 80
     port: 80

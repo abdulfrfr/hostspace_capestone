@@ -34,7 +34,7 @@ spec:
                         valueFrom:
                             configMapKeyRef:
                                 name: {{ .Release.Name }}-configmap
-                                key: MONGO_USER
+                                key: MONGO_INITDB_ROOT_USERNAME
                     -   name: MONGO_INITDB_ROOT_PASSWORD
                         valueFrom:
                             secretKeyRef:

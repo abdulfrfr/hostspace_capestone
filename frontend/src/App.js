@@ -13,7 +13,7 @@ function App() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(`/proxy/data`);
+      const response = await axios.get(`/proxy/`);
       setData(response.data);
     } catch (error) {
       console.error('Error fetching data:', error.message);
@@ -23,7 +23,7 @@ function App() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(`/proxy/data`, { message: inputValue });
+      await axios.post(`/proxy/`, { message: inputValue });
       fetchData(); // Fetch updated data after submitting
       setInputValue('');
     } catch (error) {

@@ -21,16 +21,10 @@ RUN npm run build
 # Stage 2: Serve frontend assets with nginx
 FROM nginx:latest AS server
 
-COPY docker-entrypoint.sh /docker-entrypoint.sh
-
-RUN chmod +x /docker-entrypoint.sh
-
-ENTRYPOINT ["/docker-entrypoint.sh"]
-
 # Copy built assets from the previous stage into nginx's html directory
 COPY --from=frontend /frontend/build/ /usr/share/nginx/html/
 
-COPY nginx.conf /etc/nginx/nginx.conf
+COPY nginx.conf /etc/nginx/conf.d/nginx.conf
 
 # Expose port 80
 EXPOSE 80

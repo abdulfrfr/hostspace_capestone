@@ -1,0 +1,15 @@
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: capestone
+  namespace: default
+spec:
+  encryptedData:
+    MONGO_INITDB_ROOT_PASSWORD: AgBGKmTPsx/wh4k7syRBmBxzckfx8kSjdtb5aXtKpcLzYlNBUy5IKACAztpsuvEM+72dxKE9R2QR7oz7zNQXrDAEWX4a3o2ZY2SsgYjPerJL3SMOFkkLlEL/IDrHMKkr/LGEKKBZFUENqK+N4Q0pmuqUWv69sg4P9cmeBg7IVW9UI+KlgOpf8KWieLX1ZDKJfYYI9XCUKxnR71JRkKQaevhbEgTcXPl7j2bw43W9wS2VI/2Jvqfg7qoT58EvA38Dv/Iy2/Ym6HzIF5VZzlekqjHMDpKmmpeJHKGK0l7/b0W1pe0dS1vGl+mwDJMKnFWe46JK9OJ5PGCYH2Zrk2UHaqz5bSvZcA+HiVcI0y/oPoKxPmiEwWbeISob0yUoGR7tdx4xYUIA7FEyCo2oj3nEzi/28/gIHaNKcKNrim6R3wvFfhmNsq4sIiAELM4lX2vkqCARsP60kk8v3lBu+o0MLa3OELFq3ey2dSPDYX3fZsjzl3woU+PmKCEVp44NKArhkoJzRMeOI9pQ1y6opiDGXdw1pO5oM3CG24EmzFuQ1SOhIzmusg/lgM67mVAZ8obm4C2H/Yr1eAHF8uUBZgDTzeVfZN8HFzKcr2sveT6OaBbwRSyxZqrDoI//94pWjgWVEKz2CO6AdWopUyyh4SW2LVXbRW7Uwxr/y5quCbFxJ0ehakEF8HyP3z8s9Doxmnjyq10HvMas
+  template:
+    metadata:
+      creationTimestamp: null
+      name: capestone
+      namespace: default

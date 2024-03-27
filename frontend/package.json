@@ -35,5 +35,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@import-meta-env/babel": "^0.4.5",
+    "@import-meta-env/unplugin": "^0.5.1"
   }
 }

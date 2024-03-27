@@ -5,8 +5,9 @@ function App() {
   const [data, setData] = useState([]);
   const [inputValue, setInputValue] = useState('');
 
-  const apiUrl = window.REACT_APP_API_URL
-  const ns = window.REACT_APP_BACKEND_NS
+  const apiUrl = window.location.headers['X-Api-Url'];
+  const ns = window.location.headers['X-Backend-Namespace'];
+  
 
   // Fetch data from backend on component mount
   useEffect(() => {

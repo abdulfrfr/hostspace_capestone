@@ -29,7 +29,7 @@ spec:
                   imagePullPolicy: {{ .Values.backend.containers.imagePullPolicy }}
                   env:
                     -   name: MONGO_URL
-                        value: {{ .Release.Name }}-db-svc
+                        value: db-svc
                     -   name: MONGO_NS
                         value: default
                     -   name: MONGO_INITDB_ROOT_USERNAME
@@ -48,7 +48,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-    name: {{ .Release.Name }}-backend-svc
+    name: backend-svc
 spec:
     type: {{ .Values.service.backend.type }}
     selector:

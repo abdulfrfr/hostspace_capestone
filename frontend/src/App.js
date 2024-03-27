@@ -5,8 +5,8 @@ function App() {
   const [data, setData] = useState([]);
   const [inputValue, setInputValue] = useState('');
 
-  const apiUrl = process.env.REACT_APP_API_URL
-  const ns = process.env.REACT_APP_BACKEND_NS
+  const apiUrl = window.REACT_APP_API_URL
+  const ns = window.REACT_APP_BACKEND_NS
 
   // Fetch data from backend on component mount
   useEffect(() => {
@@ -15,7 +15,7 @@ function App() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(`http://${window.apiUrl}.${window.ns}.svc.cluster.local:5000/data`);
+      const response = await axios.get(`http://${apiUrl}.${ns}.svc.cluster.local:5000/data`);
       setData(response.data);
     } catch (error) {
       console.error('Error fetching data:', error.message);
@@ -25,7 +25,7 @@ function App() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(`http://${window.apiUrl}.${window.ns}.svc.cluster.local:5000/data`, { message: inputValue });
+      await axios.post(`http://${apiUrl}:5000/data`, { message: inputValue });
       fetchData(); // Fetch updated data after submitting
       setInputValue('');
     } catch (error) {

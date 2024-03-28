@@ -24,6 +24,8 @@ FROM nginx:latest AS server
 # Copy built assets from the previous stage into nginx's html directory
 COPY --from=frontend /frontend/build/ /usr/share/nginx/html/
 
+COPY nginx.conf /etc/nginx/conf.d/nginx.conf
+
 COPY run.sh /run.sh
 
 RUN chmod +x /run.sh

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-chmod +x /run.sh
+chmod +x //etc/nginx/conf.d/nginx.conf
 
 envsubst < /etc/nginx/conf.d/nginx.conf > /etc/nginx/conf.d/default.conf
 

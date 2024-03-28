@@ -27,6 +27,9 @@ spec:
                         cpu: {{ .Values.frontend.containers.resources.requests.cpu }}
                         memory: {{ .Values.frontend.containers.resources.requests.memory }}
                   imagePullPolicy: {{ .Values.frontend.containers.imagePullPolicy }}
+                  env:
+                    - name: BACKEND_URL
+                      value: http://192.168.49.2:30001/
 
 
                   

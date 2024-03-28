@@ -24,7 +24,7 @@ backend:
   containers:
     image: docker.io/abdulfrfr/backend-app:latest
     name: backend
-    port: 80
+    port: 5000
     resources:
       limits:
           cpu: 500m

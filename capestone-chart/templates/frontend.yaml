@@ -29,7 +29,7 @@ spec:
                   imagePullPolicy: {{ .Values.frontend.containers.imagePullPolicy }}
                   env:
                     - name: BACKEND_URL
-                      value: http://192.168.49.2:5000/
+                      value: http://backend:5000
 
 
                   

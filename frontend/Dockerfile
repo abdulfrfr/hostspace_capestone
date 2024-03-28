@@ -19,7 +19,7 @@ RUN npm run build
 
 
 # Stage 2: Serve frontend assets with nginx
-FROM nginx:latest AS server
+FROM nginx:1.23.3 AS server
 
 # Copy built assets from the previous stage into nginx's html directory
 COPY --from=frontend /frontend/build/ /usr/share/nginx/html/

@@ -35,7 +35,7 @@ spec:
                     failureThreshold: 3
                   env:
                     - name: BACKEND_URL
-                      value: http://backend.svc:5000
+                      value: http://backend-svc:5000
 
 
                   
@@ -44,7 +44,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-    name: {{ .Release.Name }}-frontend-svc
+    name: frontend-svc
 spec:
     type: {{ .Values.service.frontend.type }}
     selector:

@@ -29,4 +29,4 @@ COPY nginx.conf /etc/nginx/conf.d/nginx.conf
 # Expose port 80
 EXPOSE 80
 
-CMD ["nginx", "-g", "daemon off"]
+CMD ["nginx", "-g", "daemon off;"]

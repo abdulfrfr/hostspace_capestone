@@ -26,11 +26,7 @@ COPY --from=frontend /frontend/build/ /usr/share/nginx/html/
 
 COPY nginx.conf /etc/nginx/conf.d/nginx.conf
 
-COPY run.sh /run.sh
-
-RUN chmod +x /run.sh
-
 # Expose port 80
 EXPOSE 80
 
-ENTRYPOINT ["/bin/sh", "/run.sh"]
+CMD ["nginx -g", "daemon off"]

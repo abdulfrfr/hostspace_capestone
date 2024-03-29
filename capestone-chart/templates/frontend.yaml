@@ -27,15 +27,9 @@ spec:
                         cpu: {{ .Values.frontend.containers.resources.requests.cpu }}
                         memory: {{ .Values.frontend.containers.resources.requests.memory }}
                   imagePullPolicy: {{ .Values.frontend.containers.imagePullPolicy }}
-                  readinessProbe:
-                    httpGet:
-                        port: 5000
-                    initialDelaySeconds: 15
-                    periodSeconds: 10
-                    failureThreshold: 3
-                  env:
-                    - name: BACKEND_URL
-                      value: http://backend-svc:5000
+                #   env:
+                #     - name: BACKEND_URL
+                #       value: http://backend-svc:5000
 
 
                   

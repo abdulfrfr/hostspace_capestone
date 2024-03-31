@@ -12,10 +12,10 @@ metadata:
       }      
 spec:
   rules:
-  - host: cafe.example.com
+  - host: abdul.handyguide.io
     http:
       paths:
-      - path: /app
+      - path: /
         pathType: Prefix
         backend:
           service:

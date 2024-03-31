@@ -28,4 +28,4 @@ spec:
           service:
             name: backend-svc
             port:
-              number: 5000
+              number: 80

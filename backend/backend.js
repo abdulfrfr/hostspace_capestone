@@ -33,7 +33,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // Routes
-app.get('/proxy/data', async (req, res) => {
+app.get('/data', async (req, res) => {
   try {
     const data = await Data.find();
     res.json(data);
@@ -42,7 +42,7 @@ app.get('/proxy/data', async (req, res) => {
   }
 });
 
-app.post('/proxy/data', async (req, res) => {
+app.post('/data', async (req, res) => {
   try {
     const newData = new Data(req.body);
     await newData.save();

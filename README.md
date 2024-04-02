@@ -2,11 +2,11 @@
 
 ``PRE-REQUISITES``
 
-[x] Kubernetes Cluster
-[x] Helm CLI
-[x] Kubeseal CLI
-[x] Pyhton3
-[x] SealedSecret Insatalled on Cluster
++ Kubernetes Cluster
++ Helm CLI
++ Kubeseal CLI
++ Pyhton3
++ SealedSecret Insatalled on Cluster
 
 The applications on this project consists of a React frontend, ExpressJS Backend application and a MongoDB Database.
 

@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
     name: {{ .Release.Name }}-db-deploy
     labels:
@@ -38,6 +38,17 @@ spec:
                             secretKeyRef:
                                 name: capestone
                                 key: MONGO_INITDB_ROOT_PASSWORD
+            volumeMounts:
+                - name: mongodb-data
+                  mountPath: /data/db
+volumeClaimTemplates:
+  - metadata:
+      name: {{ .Release.Name }}-db-data
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      resources:
+        requests:
+          storage: 1Gi
 
 ---
 

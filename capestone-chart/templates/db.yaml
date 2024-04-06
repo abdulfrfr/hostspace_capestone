@@ -42,13 +42,13 @@ spec:
                     - name: {{ .Release.Name }}-db-data
                       mountPath: /data/db
     volumeClaimTemplates:
-      - metadata:
+    - metadata:
           name: {{ .Release.Name }}-db-data
-        spec:
-          accessModes: ["ReadWriteOnce"]
-          resources:
-            requests:
-              storage: 1Gi
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 1Gi
 
 ---
 

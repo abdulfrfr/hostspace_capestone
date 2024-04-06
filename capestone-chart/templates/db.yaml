@@ -62,6 +62,6 @@ spec:
         app: db-app
     ports:
         - name: http
-          port: {{ .Values.service.db.port }}
+          port: 27017
           protocol: TCP
-          targetPort: {{ .Values.service.db.targetPort }}
+          targetPort: 27017

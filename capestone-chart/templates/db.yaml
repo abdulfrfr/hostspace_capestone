@@ -39,7 +39,7 @@ spec:
                                 name: capestone
                                 key: MONGO_INITDB_ROOT_PASSWORD
                   volumeMounts:
-                    - name: mongodb-data
+                    - name: {{ .Release.Name }}-db-data
                       mountPath: /data/db
 volumeClaimTemplates:
   - metadata:

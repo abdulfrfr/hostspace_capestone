@@ -57,7 +57,6 @@ kind: Service
 metadata:
     name: db-svc
 spec:
-    type: {{ .Values.service.db.type }}
     selector:
         app: db-app
     ports:

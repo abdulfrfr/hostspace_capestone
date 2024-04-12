@@ -11,6 +11,7 @@ metadata:
         return 302 /;
       }      
 spec:
+  ingressClassName: nginx-new
   rules:
   - host: abdul.handyguide.io
     http:
